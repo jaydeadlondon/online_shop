@@ -28,8 +28,10 @@ MANIFEST
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-/media
 /staticfiles
+
+# Media files (sample product images are included in repo)
+# /media - uncomment to ignore user uploads in production
 
 # Environment
 .env

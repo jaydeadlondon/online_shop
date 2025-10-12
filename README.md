@@ -1,13 +1,31 @@
 # WorldPactLeader - Online Store
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![Django](https://img.shields.io/badge/django-5.0.1-green.svg)](https://www.djangoproject.com/)
+
 Онлайн-магазин нишевой одежды с минималистичным дизайном.
 
-## Быстрый старт
+🔗 **Live Demo**: [https://github.com/jaydeadlondon/online_shop](https://github.com/jaydeadlondon/online_shop)
+
+## 🎯 Особенности
+
+- 🛍️ Каталог товаров с фильтрацией и поиском
+- 🎨 Минималистичный дизайн (Tailwind CSS + Alpine.js)
+- 💳 Интеграция Stripe для безопасных платежей
+- 🔐 Аутентификация пользователей
+- 🛒 Корзина и избранное
+- 📦 Система заказов
+- 🎁 Промокоды и скидки
+- 📊 Админ-панель Django
+- 🔍 RESTful API + Swagger документация
+
+## 🚀 Быстрый старт
 
 ### 1. Установка
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/jaydeadlondon/online_shop.git
 cd online_shop
 python -m venv venv
 venv\Scripts\activate
@@ -119,6 +137,19 @@ online_shop/
 
 ---
 
-## Автор
+## Лицензия
 
-worldpactleader © 2025
+MIT License
+
+
+## 🤝 Контрибуция
+
+Pull requests приветствуются! Для больших изменений, пожалуйста, сначала откройте issue для обсуждения.
+
+## 📝 Лицензия
+
+[MIT](LICENSE)
+
+## 👤 Автор
+
+jaydeadlondon © 2025
