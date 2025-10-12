@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ product.name }} - WorldPactLeader{% endblock %}
+
+{% block content %}
+<div class="min-h-screen pt-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Breadcrumb -->
+        <nav class="flex items-center space-x-2 text-sm mb-8">
+            <a href="{% url 'home' %}" class="text-gray-500 hover:text-black">Home</a>
+            <span class="text-gray-400">/</span>
+            <a href="{% url 'products_list' %}" class="text-gray-500 hover:text-black">Shop</a>
+            <span class="text-gray-400">/</span>
+            <span class="text-gray-900">{{ product.name }}</span>
+        </nav>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-white rounded-lg shadow-sm p-8">
+            <!-- Images -->
+            <div x-data="{ activeImage: 0 }">
+                <!-- Main Image -->
+                <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden mb-4">
+                    {% if product.images.all %}
+                        {% for image in product.images.all %}
+                        <img :src="activeImage === {{ forloop.counter0 }} ? '{{ image.image.url }}' : ''" 
+                             x-show="activeImage === {{ forloop.counter0 }}"
+                             alt="{{ product.name }}"
+                             class="w-full h-full object-cover">
+                        {% endfor %}
+                    {% else %}
+                    <div class="w-full h-full flex items-center justify-center text-gray-400">
+                        No image available
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Thumbnails -->
+                {% if product.images.all|length > 1 %}
+                <div class="grid grid-cols-4 gap-4">
+                    {% for image in product.images.all %}
+                    <button @click="activeImage = {{ forloop.counter0 }}"
+                            :class="activeImage === {{ forloop.counter0 }} ? 'ring-2 ring-black' : ''"
+                            class="aspect-square bg-gray-100 rounded-lg overflow-hidden hover:opacity-75 transition-opacity">
+                        <img src="{{ image.image.url }}" 
+                             alt="{{ product.name }}"
+                             class="w-full h-full object-cover">
+                    </button>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Product Info -->
+            <div>
+                <p class="text-gray-500 mb-2">{{ product.brand.name }}</p>
+                <h1 class="text-3xl font-bold mb-4">{{ product.name }}</h1>
+                
+                <div class="flex items-baseline gap-4 mb-6">
+                    <p class="text-3xl font-bold">${{ product.price }}</p>
+                    <span class="px-3 py-1 text-sm border border-gray-300 rounded">
+                        {{ product.get_condition_display }}
+                    </span>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-8">
+                    <h3 class="font-semibold mb-2">Description</h3>
+                    <p class="text-gray-600 leading-relaxed">{{ product.description }}</p>
+                </div>
+
+                <!-- Details -->
+                <div class="mb-8 grid grid-cols-2 gap-4 text-sm">
+                    <div>
+                        <p class="text-gray-500">Category</p>
+                        <p class="font-medium">{{ product.category.name }}</p>
+                    </div>
+                    {% if product.season %}
+                    <div>
+                        <p class="text-gray-500">Season</p>
+                        <p class="font-medium">{{ product.season.name }}</p>
+                    </div>
+                    {% endif %}
+                    <div>
+                        <p class="text-gray-500">Condition</p>
+                        <p class="font-medium">{{ product.get_condition_display }}</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-500">Available</p>
+                        <p class="font-medium">{% if product.is_available %}In Stock{% else %}Out of Stock{% endif %}</p>
+                    </div>
+                </div>
+
+                <!-- Size Selection -->
+                <div class="mb-8" x-data="{ selectedSize: '{{ product.size.value|default:'' }}' }">
+                    <label class="block font-semibold mb-3">Size</label>
+                    <div class="flex flex-wrap gap-2">
+                        {% for size_option in available_sizes %}
+                        <button @click="selectedSize = '{{ size_option.value }}'"
+                                :class="selectedSize === '{{ size_option.value }}' ? 'bg-black text-white border-black' : 'bg-white text-gray-700 border-gray-300 hover:border-black'"
+                                class="px-4 py-2 border rounded transition-colors font-medium">
+                            {{ size_option.value }}
+                        </button>
+                        {% endfor %}
+                    </div>
+                    <input type="hidden" id="selected-size" :value="selectedSize">
+                </div>
+
+                <!-- Actions -->
+                <div class="flex gap-4 mb-8">
+                    <button onclick="addToCartWithSize({{ product.id }}, '{{ product.name|escapejs }}')" 
+                            class="flex-1 px-8 py-3 bg-black text-white font-medium rounded hover:bg-gray-800 transition-colors">
+                        Add to Cart
+                    </button>
+                    <button onclick="addToWishlist({{ product.id }}, '{{ product.name|escapejs }}')" 
+                            class="p-3 border border-gray-300 rounded hover:border-black transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <script>
+                function addToCartWithSize(productId, productName) {
+                    const selectedSize = document.getElementById('selected-size').value;
+                    if (!selectedSize) {
+                        alert('Please select a size');
+                        return;
+                    }
+                    // Вызываем существующую функцию addToCart
+                    addToCart(productId, productName);
+                }
+                </script>
+
+                <!-- Additional Info -->
+                <div class="border-t pt-6 space-y-4 text-sm text-gray-600">
+                    <div class="flex items-start gap-3">
+                        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        <p>Authenticity guaranteed - all items are verified</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/>
+                        </svg>
+                        <p>Free shipping on orders over $200</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                        </svg>
+                        <p>14-day returns policy</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

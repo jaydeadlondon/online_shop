@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}FAQ - WorldPactLeader{% endblock %}
+
+{% block content %}
+<div class="min-h-screen pt-16 bg-gray-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h1 class="text-4xl font-bold mb-4">Frequently Asked Questions</h1>
+        <p class="text-gray-600 mb-12">Find answers to common questions about our products and services.</p>
+        
+        <div class="space-y-4">
+            {% if faqs %}
+            {% for faq in faqs %}
+            <div class="bg-white rounded-lg border border-gray-200" x-data="{ open: false }">
+                <button @click="open = !open" class="w-full px-6 py-4 text-left flex items-center justify-between">
+                    <span class="font-semibold">{{ faq.question }}</span>
+                    <svg class="w-5 h-5 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>
+                <div x-show="open" x-collapse class="px-6 pb-4 text-gray-600">
+                    {{ faq.answer }}
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="bg-white rounded-lg p-8 text-center text-gray-500">
+                No FAQs available yet.
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

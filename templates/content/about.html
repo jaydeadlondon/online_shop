@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About - WorldPactLeader{% endblock %}
+
+{% block content %}
+<div class="min-h-screen pt-16 bg-gray-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h1 class="text-4xl font-bold mb-4">Our Story</h1>
+        <p class="text-xl text-gray-600 mb-12">Discover unique pieces from fashion's most iconic moments.</p>
+        
+        <div class="bg-white rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold mb-4">About WorldPactLeader</h2>
+            <div class="prose max-w-none text-gray-600 space-y-4">
+                <p>
+                    WorldPactLeader is a curated platform for archive fashion enthusiasts. We specialize in rare and unique pieces from some of the world's most innovative designers and brands.
+                </p>
+                <p>
+                    Our collection features avant-garde pieces from designers like Rick Owens, Raf Simons, Comme des Garçons, and many more. Each item is carefully selected and authenticated to ensure you receive only genuine archive pieces.
+                </p>
+                <p>
+                    We believe that fashion is more than just clothing - it's art, history, and personal expression. Our mission is to make these iconic pieces accessible to collectors and fashion lovers worldwide.
+                </p>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white rounded-lg p-6 text-center">
+                <div class="text-3xl font-bold mb-2">100%</div>
+                <p class="text-gray-600">Authenticated</p>
+            </div>
+            <div class="bg-white rounded-lg p-6 text-center">
+                <div class="text-3xl font-bold mb-2">7+</div>
+                <p class="text-gray-600">Premium Brands</p>
+            </div>
+            <div class="bg-white rounded-lg p-6 text-center">
+                <div class="text-3xl font-bold mb-2">24/7</div>
+                <p class="text-gray-600">Support</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

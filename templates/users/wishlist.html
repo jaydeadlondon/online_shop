@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Wishlist - WorldPactLeader{% endblock %}
+
+{% block content %}
+<div class="min-h-screen pt-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <h1 class="text-3xl font-bold mb-8">My Wishlist</h1>
+        
+        {% if wishlist_products %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {% for product in wishlist_products %}
+            <div class="card-hover">
+                <div class="bg-white rounded-lg overflow-hidden border border-gray-100">
+                    <a href="{% url 'product_detail' product.slug %}" class="relative aspect-square overflow-hidden bg-gray-100 img-hover-zoom block">
+                        {% if product.images.all.0 %}
+                        <img src="{{ product.images.all.0.image.url }}" 
+                             alt="{{ product.name }}"
+                             class="w-full h-full object-cover">
+                        {% else %}
+                        <div class="w-full h-full flex items-center justify-center text-gray-400">
+                            No image
+                        </div>
+                        {% endif %}
+                    </a>
+                    <div class="p-4">
+                        <p class="text-sm text-gray-500 mb-1">{{ product.brand.name }}</p>
+                        <h3 class="font-semibold mb-2 line-clamp-1">{{ product.name }}</h3>
+                        <div class="flex items-center justify-between">
+                            <p class="text-lg font-bold">${{ product.price }}</p>
+                            <button class="text-red-500 hover:text-red-700">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M6 18L18 6M6 6l12 12"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center py-20">
+            <p class="text-gray-500 mb-4">Your wishlist is empty</p>
+            <a href="{% url 'products_list' %}" class="inline-flex px-6 py-2 border border-black rounded hover:bg-black hover:text-white transition-colors">
+                Continue Shopping
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+

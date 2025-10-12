@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Returns - WorldPactLeader{% endblock %}
+
+{% block content %}
+<div class="min-h-screen pt-16 bg-gray-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h1 class="text-4xl font-bold mb-4">Returns Policy</h1>
+        <p class="text-gray-600 mb-12">We want you to be completely satisfied with your purchase.</p>
+        
+        <div class="bg-white rounded-lg p-8 mb-6">
+            <h2 class="text-2xl font-bold mb-4">Return Window</h2>
+            <p class="text-gray-600 mb-4">
+                We offer a 14-day return policy for unworn, unwashed items in original packaging with all tags attached.
+            </p>
+        </div>
+        
+        <div class="bg-white rounded-lg p-8 mb-6">
+            <h2 class="text-2xl font-bold mb-4">Return Process</h2>
+            <div class="space-y-3 text-gray-600">
+                <p><strong>1.</strong> Contact our customer service team</p>
+                <p><strong>2.</strong> Receive return authorization and shipping label</p>
+                <p><strong>3.</strong> Package item securely with all original tags</p>
+                <p><strong>4.</strong> Ship using provided label</p>
+                <p><strong>5.</strong> Refund processed within 5-7 business days after receipt</p>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg p-8">
+            <h2 class="text-2xl font-bold mb-4">Non-Returnable Items</h2>
+            <div class="text-gray-600 space-y-2">
+                <p>• Final sale items</p>
+                <p>• Items marked as "vintage" or "as-is"</p>
+                <p>• Worn or altered items</p>
+                <p>• Items without original tags</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
