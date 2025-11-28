@@ -141,12 +141,12 @@ online_shop/
 
 Pull requests приветствуются! Для больших изменений, пожалуйста, сначала откройте issue для обсуждения.
 
-## 📝 Лицензия
-
-MIT License
-
 ## 👤 Автор
 
 jaydeadlondon
 
 - GitHub: [@jaydeadlondon](https://github.com/jaydeadlondon)
+
+## 📝 Лицензия
+
+MIT License
