@@ -143,8 +143,10 @@ Pull requests приветствуются! Для больших изменен
 
 ## 📝 Лицензия
 
-[MIT](LICENSE)
+MIT License
 
 ## 👤 Автор
 
-jaydeadlondon © 2025
+jaydeadlondon
+
+- GitHub: [@jaydeadlondon](https://github.com/jaydeadlondon)
